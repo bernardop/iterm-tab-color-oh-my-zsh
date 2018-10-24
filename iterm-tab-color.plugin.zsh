@@ -1,16 +1,13 @@
 tcDirsFilePath="$(dirname "$0")/.tc-dirs"
 declare -A directoryColors
 declare -a orderedDirectories
-OLDIFS=$IFS
-IFS="="
-while read -r dirPath hexValue
+while IFS="=" read -r dirPath hexValue
 do
   if ! ( [[ $dirPath == \#* ]]); then
 	orderedDirectories+=( $dirPath )
   	directoryColors[$dirPath]+=$hexValue
   fi
 done < $tcDirsFilePath
-IFS=$OLDIFS
 
 function directory_tab_color() {
   for k in $orderedDirectories; do
