@@ -1,26 +1,31 @@
 tcDirsFilePath="$(dirname "$0")/.tc-dirs"
 declare -A directoryColors
+declare -a orderedDirectories
 IFS="="
 while read -r dirPath hexValue
 do
-  if ! ( [[ $dirPath == \#* ]]);then
+  if ! ( [[ $dirPath == \#* ]]); then
+	orderedDirectories+=( $dirPath )
   	directoryColors[$dirPath]+=$hexValue
   fi
 done < $tcDirsFilePath
 
 function directory_tab_color() {
-  if [ ! -z "${directoryColors[${PWD}]}" ];then
-    iterm_tab_color "${directoryColors[${PWD}]}"
-  else
-    iterm_tab_color
-  fi
+  for k in $orderedDirectories; do
+  	if ( [[ "$PWD" =~ "$k" ]] ); then
+  	  iterm_tab_color "$directoryColors[$k]"
+  	  return 0
+  	fi
+  done
+
+  iterm_tab_color
 }
 
 function iterm_tab_color() {
   if [ $# -eq 0 ]; then
     # Reset tab color if called with no arguments
 	echo -ne "\033]6;1;bg;*;default\a"
-	return 1
+	return 0
   elif [ $# -eq 1 ]; then
     if ( [[ $1 == \#* ]] ); then
 	  # If single argument starts with '#', skip first character to find hex value
@@ -42,7 +47,7 @@ function iterm_tab_color() {
 	echo -ne "\033]6;1;bg;green;brightness;$GREEN\a"
 	echo -ne "\033]6;1;bg;blue;brightness;$BLUE\a"
 
-	return 1
+	return 0
   fi
 
   # If more than 1 argument, assume 3 arguments were passed
@@ -53,3 +58,4 @@ function iterm_tab_color() {
 
 alias tc='iterm_tab_color'
 chpwd_functions=(${chpwd_functions[@]} "directory_tab_color")
+directory_tab_color
