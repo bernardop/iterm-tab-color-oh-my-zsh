@@ -1,0 +1,6 @@
+#Set directory=hex-value pairs to set tab colors based on current working dir
+#You can use regular expressions for directories
+#The color will be set to the first matched directory (top to bottom)
+#Examples below (lines starting with '#' are ignored, so remove it for it to work)
+#/Users/me/projects/personal*=#065535
+#/Users/me/projects/work*=#3399ff
