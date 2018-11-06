@@ -18,21 +18,21 @@ function command_tab_color() {
 
 function try_set_tab_color() {
   for k in $orderedConfig; do
-	  if ( [[ "$1" =~ "$k" ]] ); then
-		  iterm_tab_color "$tcConfigColors[$k]"
-			return 0
-		fi
-	done
+    if ( [[ "$1" =~ "$k" ]] ); then
+      iterm_tab_color "$tcConfigColors[$k]"
+      return 0
+    fi
+  done
 }
 
 function iterm_tab_color() {
   if [ $# -eq 0 ]; then
-	  # Reset tab color if called with no arguments
-		echo -ne "\033]6;1;bg;*;default\a"
-		return 0
-	elif [ $# -eq 1 ]; then
-	  if ( [[ $1 == \#* ]] ); then
-		  # If single argument starts with '#', skip first character to find hex value
+    # Reset tab color if called with no arguments
+    echo -ne "\033]6;1;bg;*;default\a"
+    return 0
+  elif [ $# -eq 1 ]; then
+    if ( [[ $1 == \#* ]] ); then
+      # If single argument starts with '#', skip first character to find hex value
       RED_HEX=${1:1:2}
       GREEN_HEX=${1:3:2}
       BLUE_HEX=${1:5:2}
