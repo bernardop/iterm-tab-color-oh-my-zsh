@@ -37,13 +37,15 @@ tc '#0078ae`
 tc 0078ae
 ```
 
-### Set tab color based on current working directory
+### Set tab color based on current working directory or current command
 
-You can modify the `.tc-dirs` file located in `~/.oh-my-zsh/custom/plugins/iterm-tab-color` and add `directory=hexValue` pairs to automatically set the color of your tab to `hexValue` when your current working directory matches `directory` (you can use regular expressions)
+You can modify the `.tc-config` file located in `~/.oh-my-zsh/custom/plugins/iterm-tab-color` and add `directory=hexValue` or `command=hexValue` pairs to automatically set the color of your tab to `hexValue` when your current working directory matches `directory` or the current executing command matches `command` (you can use regular expressions)
 
-#### Example `.tc-dirs` file
+#### Example `.tc-config` file
 
 ```
 /Users/me/projects/personal*=#065535
 /Users/me/projects/work*=#3399ff
+npm*=#CB3837
+brew*=#BE862D
 ```
