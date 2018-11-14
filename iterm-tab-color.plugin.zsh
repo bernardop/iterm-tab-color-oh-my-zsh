@@ -22,6 +22,8 @@ function try_set_tab_color() {
       iterm_tab_color "$tcConfigColors[$k]"
       return 0
     fi
+
+    iterm_tab_color
   done
 }
 
