@@ -15,7 +15,7 @@ plugins=(git iterm-tab-color)
 
 ## Usage
 
-### Explicitely using the command
+### Explicitly using the command
 
 After adding it to your plugins and restarting your current terminal you'll have a new alias available `tc`
 
